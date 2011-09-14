@@ -19,30 +19,30 @@ module Sinatra
         request[Statsd::Middleware::STATSD_DOT_SERVICE_DOT_CLIENT]
       end
 
-      def host_increment(key)
+      def increment_host(key)
         request[Statsd::Middleware::STATSD_DOT_HOST_DOT_INCREMENTS] << key
       end
 
-      def service_increment(key)
+      def increment_service(key)
         request[Statsd::Middleware::STATSD_DOT_SERVICE_DOT_INCREMENTS] << key
       end
 
-      def all_increment(key)
-        host_increment(key)
-        service_increment(key)
+      def increment_all(key)
+        increment_host(key)
+        increment_service(key)
       end
 
-      def host_timer(key)
+      def timer_host(key)
         request[Statsd::Middleware::STATSD_DOT_HOST_DOT_TIMERS] << key
       end
 
-      def service_timer(key)
+      def timer_service(key)
         request[Statsd::Middleware::STATSD_DOT_SERVICE_DOT_TIMERS] << key
       end
 
-      def all_timer(key)
-        host_timer(key)
-        service_timer(key)
+      def timer_all(key)
+        timer_host(key)
+        timer_service(key)
       end
     end
   end
