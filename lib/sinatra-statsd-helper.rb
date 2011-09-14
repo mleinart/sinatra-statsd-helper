@@ -27,12 +27,22 @@ module Sinatra
         request[Statsd::Middleware::STATSD_DOT_SERVICE_DOT_INCREMENTS] << key
       end
 
+      def all_increment(key)
+        host_increment(key)
+        service_increment(key)
+      end
+
       def host_timer(key)
         request[Statsd::Middleware::STATSD_DOT_HOST_DOT_TIMERS] << key
       end
 
       def service_timer(key)
         request[Statsd::Middleware::STATSD_DOT_SERVICE_DOT_TIMERS] << key
+      end
+
+      def all_timer(key)
+        host_timer(key)
+        service_timer(key)
       end
     end
   end
