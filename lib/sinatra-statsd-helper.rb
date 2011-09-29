@@ -5,26 +5,26 @@ require 'statsd/middleware'
 module Sinatra
   module Helpers
     module Statsd
-      VERSION = "0.1"
+      VERSION = "0.2"
 
       def statsd_client
-        request[Statsd::Middleware::STATSD_DOT_CLIENT]
+        request.env[::Statsd::Middleware::STATSD_DOT_CLIENT]
       end
 
       def statsd_host_client
-        request[Statsd::Middleware::STATSD_DOT_HOST_DOT_CLIENT]
+        request.env[::Statsd::Middleware::STATSD_DOT_HOST_DOT_CLIENT]
       end
 
       def statsd_service_client
-        request[Statsd::Middleware::STATSD_DOT_SERVICE_DOT_CLIENT]
+        request.env[::Statsd::Middleware::STATSD_DOT_SERVICE_DOT_CLIENT]
       end
 
       def increment_host(key)
-        request[Statsd::Middleware::STATSD_DOT_HOST_DOT_INCREMENTS] << key
+        request.env[::Statsd::Middleware::STATSD_DOT_HOST_DOT_INCREMENTS] << key
       end
 
       def increment_service(key)
-        request[Statsd::Middleware::STATSD_DOT_SERVICE_DOT_INCREMENTS] << key
+        request.env[::Statsd::Middleware::STATSD_DOT_SERVICE_DOT_INCREMENTS] << key
       end
 
       def increment_all(key)
@@ -33,11 +33,11 @@ module Sinatra
       end
 
       def timer_host(key)
-        request[Statsd::Middleware::STATSD_DOT_HOST_DOT_TIMERS] << key
+        request.env[::Statsd::Middleware::STATSD_DOT_HOST_DOT_TIMERS] << key
       end
 
       def timer_service(key)
-        request[Statsd::Middleware::STATSD_DOT_SERVICE_DOT_TIMERS] << key
+        request.env[::Statsd::Middleware::STATSD_DOT_SERVICE_DOT_TIMERS] << key
       end
 
       def timer_all(key)
